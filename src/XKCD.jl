@@ -33,6 +33,8 @@ function comic(i::Union{Nothing, Int} = nothing; open=true)
     img = "https:$(cleanmatch(match(r"src=\"(.*?)\"", ln).match))"
     hover = cleanmatch(match(r"title=\"(.*?)\"", ln).match)
     title = replace(match(r"<div id=\"ctitle\">(.*?)</div>", body).match, r"(<div id=\"ctitle\">|</div>)" => "")
+    idmatch = match(r"Permanent link to this comic: https://xkcd.com/(.*?)<br />", body).match
+    id = replace(idmatch, r"(Permanent link to this comic: https://xkcd.com/|/<br />)" => "")
     if open
         if Sys.isapple()
             run(`open $img`)
@@ -42,7 +44,7 @@ function comic(i::Union{Nothing, Int} = nothing; open=true)
             run(`start $img`)
         end
     end
-    XKCDComic(1, title, img, hover)
+    XKCDComic(parse(Int, id), title, img, hover)
 end
 
 function cleanmatch(x) 

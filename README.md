@@ -7,8 +7,8 @@ A Julia package for retrieving the image (and importantly, the hovertext) for th
 ```julia
 using XKCD
 
-XKCD.comic(552)
-# Dict{Symbol,String} with 2 entries:
-#   :imgsrc => "https://imgs.xkcd.com/comics/correlation.png"
-#   :hover  => "Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'."
+# Creates struct with fields: id, title, img, and hover
+c = XKCD.comic(552)
+# XKCDComic (1, "Correlation", https://imgs.xkcd.com/comics/correlation.png)
+#   Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'.
 ```
