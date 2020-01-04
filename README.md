@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/joshday/XKCD.jl.svg?branch=master)](https://travis-ci.org/joshday/XKCD.jl)
+
 # XKCD
 
 A Julia package for retrieving the image (and importantly, the hovertext) for the XKCD webcomic:
