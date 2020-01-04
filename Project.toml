@@ -3,6 +3,9 @@ uuid = "4bc7fa8b-4ef2-4643-8c8b-cef036f85839"
 authors = ["joshday <emailjoshday@gmail.com>"]
 version = "0.1.0"
 
+[deps]
+HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
+
 [compat]
 julia = "1"
 
