@@ -2,6 +2,11 @@ module XKCD
 
 using HTTP
 
+"""
+    comic(i=nothing; open=true)
+
+Get comic number `i` (most recent if `nothing`) and optionally open the image in browser.
+"""
 function comic(i::Union{Nothing, Int} = nothing; open=true)
     myurl = "https://xkcd.com/$(isnothing(i) ? "" : i)"
     x = split(String(HTTP.get(myurl).body), '\n')
@@ -9,7 +14,6 @@ function comic(i::Union{Nothing, Int} = nothing; open=true)
     ln = x[i + 1]
     src = "https:$(cleanmatch(match(r"src=\"(.*?)\"", ln).match))"
     title = cleanmatch(match(r"title=\"(.*?)\"", ln).match)
-    println(title)
     if open
         if Sys.isapple()
             run(`open $src`)
@@ -19,7 +23,7 @@ function comic(i::Union{Nothing, Int} = nothing; open=true)
             run(`start $src`)
         end
     end
-    (imgsrc=src, hover=title)
+    Dict(:imgsrc => src, :hover => title)
 end
 
 function cleanmatch(x) 
