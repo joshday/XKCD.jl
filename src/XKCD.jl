@@ -1,6 +1,11 @@
 module XKCD
 
-using HTTP
+using HTTP, JSON3
+
+function comicdata(i::Union{Nothing, Integer} = nothing)
+    part = isnothing(i) ? "" : "/$i"
+    JSON3.read(HTTP.get("https://xkcd.com$part/info.0.json").body)
+end
 
 #-----------------------------------------------------------------------------# XKCDComic
 struct XKCDComic
@@ -25,34 +30,12 @@ Get comic number `i` (most recent if `nothing`) and optionally open the image in
 an `XKCDComic` struct with fields `id`, `title`, `img`, and `hover`.
 """
 function comic(i::Union{Nothing, Int} = nothing; open=true)
-    myurl = "https://xkcd.com/$(isnothing(i) ? "" : i)"
-    body = String(HTTP.get(myurl).body)
-    x = split(body, '\n')
-    i = findfirst(==("""<div id="comic">"""), x)
-    ln = x[i + 1]
-    img = "https:$(cleanmatch(match(r"src=\"(.*?)\"", ln).match))"
-    hover = cleanmatch(match(r"title=\"(.*?)\"", ln).match)
-    title = replace(match(r"<div id=\"ctitle\">(.*?)</div>", body).match, r"(<div id=\"ctitle\">|</div>)" => "")
-    idmatch = match(r"Permanent link to this comic: https://xkcd.com/(.*?)<br />", body).match
-    id = replace(idmatch, r"(Permanent link to this comic: https://xkcd.com/|/<br />)" => "")
-    if open
-        if Sys.isapple()
-            run(`open $img`)
-        elseif Sys.islinux()
-            run(`xdg-open $img`)
-        elseif Sys.iswindows()
-            run(`start $img`)
-        end
-    end
-    XKCDComic(parse(Int, id), title, img, hover)
-end
-
-function cleanmatch(x) 
-    x = replace(x, r"(src=|title=|\")" => "")
-    x = replace(x, "&quot;" => '"')
-    x = replace(x, "&#39;" => "'")
-    x = replace(x, "&gt;" => ">")
-    x = replace(x, "&lt;" => "<")
+    data = comicdata(i)
+    img, hover, title, id = data.img, data.alt, data.safe_title, data.num
+    open && Sys.isapple() && run(`open $img`)
+    open && Sys.islinux() && run(`xdg-open $img`)
+    open && Sys.iswindows() &&run(`start $img`)
+    XKCDComic(id, title, img, hover)
 end
 
 end # module
