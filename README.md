@@ -2,7 +2,7 @@
 
 # XKCD
 
-A Julia package for retrieving the image (and importantly, the hovertext) for the XKCD webcomic: [xkcd.com](https://xkcd.com).
+A Julia package for retrieving data from the XKCD webcomic: [xkcd.com](https://xkcd.com).
 
 ## Usage
 
