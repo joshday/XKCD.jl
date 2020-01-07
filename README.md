@@ -11,6 +11,8 @@ The `comic` function retrieves the comic's data and optionally opens the image i
 ```julia
 using XKCD
 
+XKCD.comic()  # most recent comic
+
 XKCD.comic(552; open=false)
 # JSON3.Object{Base.CodeUnits{UInt8,JSON3.VectorString{Array{UInt8,1}}},Array{UInt64,1}} with 11 entries:
 #   :month      => "3"
