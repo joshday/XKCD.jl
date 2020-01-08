@@ -13,6 +13,8 @@ using XKCD
 
 XKCD.comic()  # most recent comic
 
+XKCD.rand_comic()  # get comic at random
+
 XKCD.comic(552; open=false)
 # JSON3.Object{Base.CodeUnits{UInt8,JSON3.VectorString{Array{UInt8,1}}},Array{UInt64,1}} with 11 entries:
 #   :month      => "3"
