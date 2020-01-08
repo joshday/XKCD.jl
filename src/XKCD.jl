@@ -23,4 +23,15 @@ function comic(i::Union{Nothing, Int} = nothing; open=true)
     data
 end
 
+#-----------------------------------------------------------------------------# rand_comic
+"""
+    rand_comic(; open=true)
+
+Retrieve a comic at random.
+"""
+function rand_comic(; open=true)
+    data = comicdata()
+    comic(rand(1:data.num); open=open)
+end
+
 end # module
