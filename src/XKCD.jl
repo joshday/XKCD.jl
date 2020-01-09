@@ -14,12 +14,12 @@ end
 
 Get comic number `i` (most recent if `nothing`) and optionally open the image in browser.
 """
-function comic(i::Union{Nothing, Int} = nothing; open=true)
+function comic(i::Union{Nothing, Int} = nothing; open=false)
     data = comicdata(i)
     img = data.img
     open && Sys.isapple() && run(`open $img`)
     open && Sys.islinux() && run(`xdg-open $img`)
-    open && Sys.iswindows() &&run(`start $img`)
+    open && Sys.iswindows() &&run(`explorer $img`)
     data
 end
 

@@ -29,3 +29,7 @@ XKCD.comic(552; open=false)
 #   :title      => "Correlation"
 #   :day        => "6"
 ```
+
+## Displaying in iTerm
+
+![](https://user-images.githubusercontent.com/8075494/72072853-c3e49780-32bc-11ea-9da1-22c5cfee61fc.png)
