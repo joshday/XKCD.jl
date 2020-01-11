@@ -1,6 +1,8 @@
 module XKCD
 
-using HTTP, JSON3
+using HTTP, JSON3, DefaultApplication
+
+export comic, comicdata, rand_comic
 
 #-----------------------------------------------------------------------------# comicdata
 function comicdata(i::Union{Nothing, Integer} = nothing)
@@ -16,10 +18,7 @@ Get comic number `i` (most recent if `nothing`) and optionally open the image in
 """
 function comic(i::Union{Nothing, Int} = nothing; open=false)
     data = comicdata(i)
-    img = data.img
-    open && Sys.isapple() && run(`open $img`)
-    open && Sys.islinux() && run(`xdg-open $img`)
-    open && Sys.iswindows() &&run(`explorer $img`)
+    open && DefaultApplication.open(download(data.img))
     data
 end
 
