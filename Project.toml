@@ -9,6 +9,7 @@ HTTP = "cd3eb016-35fb-5094-929b-558a96fad6f3"
 JSON3 = "0f8b85d8-7281-11e9-16c2-39a750bddbf1"
 
 [compat]
+DefaultApplicatoin = "0.1"
 HTTP = "0.8"
 JSON3 = "0.1"
 julia = "1"
