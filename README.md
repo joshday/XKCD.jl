@@ -6,30 +6,40 @@ A Julia package for retrieving data from the XKCD webcomic: [xkcd.com](https://x
 
 ## Usage
 
+Use the `Comic` struct to retrieve a comic's metadata.
 The `comic` function retrieves the comic's data and optionally opens the image in a browser.
 
 ```julia
 using XKCD
 
-XKCD.comic()  # most recent comic
-
-XKCD.rand_comic()  # get comic at random
-
-XKCD.comic(552; open=false)
-# JSON3.Object{Base.CodeUnits{UInt8,JSON3.VectorString{Array{UInt8,1}}},Array{UInt64,1}} with 11 entries:
-#   :month      => "3"
-#   :num        => 552
-#   :link       => ""
-#   :year       => "2009"
-#   :news       => ""
-#   :safe_title => "Correlation"
-#   :transcript => "[[A man is talking to a woman]]\nMan: I used to think correlation implied causation.\nMan: Then I took a statistics class.  Now I don't…
-#   :alt        => "Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there…
-#   :img        => "https://imgs.xkcd.com/comics/correlation.png"
-#   :title      => "Correlation"
-#   :day        => "6"
+julia> Comic(552)
 ```
 
-## Displaying in iTerm (or Jupyter Notebooks)
+```
+Comic
+{
+        "month": "3",
+          "num": 552,
+         "link": "",
+         "year": "2009",
+         "news": "",
+   "safe_title": "Correlation",
+   "transcript": "[[A man is talking to a woman]]\nMan: I used to think correlation implied causation.\nMan: Then I took a statistics class.  Now I don't.\nWoman: Sounds like the class helped.\nMan: Well, maybe.\n{{Title text: Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'.}}",
+          "alt": "Correlation doesn't imply causation, but it does waggle its eyebrows suggestively and gesture furtively while mouthing 'look over there'.",
+          "img": "https://imgs.xkcd.com/comics/correlation.png",
+        "title": "Correlation",
+          "day": "6"
+}
+```
 
-![](https://user-images.githubusercontent.com/8075494/72072853-c3e49780-32bc-11ea-9da1-22c5cfee61fc.png)
+## Special Features:
+
+### Display in Pluto/Jupyter
+
+![](https://user-images.githubusercontent.com/8075494/106803558-57100e00-6632-11eb-8fdb-c2050d91ef2a.png)
+
+### Retrieve a comic at random
+
+```julia
+rand(Comic)
+```

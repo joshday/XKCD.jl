@@ -9,7 +9,10 @@ export Comic
     Comic()         # Most recent comic
     Comic(i::Int)   # i-th issue
 
-Get the data for comic `i` (or the most recent
+Get the metadata for an XKCD comic via the XKCD API: `https://xkcd.com/json.html`.
+
+# Example 
+    Comic(552)  # "Correlation"
 """
 struct Comic 
     json::JSON3.Object
@@ -28,7 +31,7 @@ function Base.show(io::IO, ::MIME"text/html", c::Comic)
     show(io, MIME"text/html"(), HTML("""
 	   <div>
         <h2><code>XKCD.Comic</code> $(c.json.num): $(c.json.title)</h2>
-        <img src="$(c.json.img)" alt="$(c.json.alt)">
+        <img src="$(c.json.img)" alt="$(c.json.alt)" title="$(c.json.alt)">
 		<div>
           <a href="https://xkcd.com/$(c.json.num)">
             Link to Original
