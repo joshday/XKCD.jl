@@ -2,35 +2,43 @@ module XKCD
 
 using HTTP, JSON3, DefaultApplication
 
-export comic, comicdata, rand_comic
+export Comic
 
-#-----------------------------------------------------------------------------# comicdata
-function comicdata(i::Union{Nothing, Integer} = nothing)
-    part = isnothing(i) ? "" : "/$i"
-    JSON3.read(HTTP.get("https://xkcd.com$part/info.0.json").body)
+#-----------------------------------------------------------------------------# Comic
+"""
+    Comic()         # Most recent comic
+    Comic(i::Int)   # i-th issue
+
+Get the data for comic `i` (or the most recent
+"""
+struct Comic 
+    json::JSON3.Object
 end
 
-#-----------------------------------------------------------------------------# comic
-"""
-    comic(i=nothing; open=true)
+Comic() = Comic(JSON3.read(HTTP.get("https://xkcd.com/info.0.json").body))
+Comic(i::Int) = Comic(JSON3.read(HTTP.get("https://xkcd.com/$i/info.0.json").body))
 
-Get comic number `i` (most recent if `nothing`) and optionally open the image in browser.
-"""
-function comic(i::Union{Nothing, Int} = nothing; open=false)
-    data = comicdata(i)
-    open && DefaultApplication.open(download(data.img))
-    data
+#-----------------------------------------------------------------------------# show
+function Base.show(io::IO, o::Comic)
+    println(io, "Comic")
+    show(io, o.json)
 end
 
-#-----------------------------------------------------------------------------# rand_comic
-"""
-    rand_comic(; open=true)
-
-Retrieve a comic at random.
-"""
-function rand_comic(; open=true)
-    data = comicdata()
-    comic(rand(1:data.num); open=open)
+function Base.show(io::IO, ::MIME"text/html", c::Comic)
+    show(io, MIME"text/html"(), HTML("""
+	   <div>
+        <h2><code>XKCD.Comic</code> $(c.json.num): $(c.json.title)</h2>
+        <img src="$(c.json.img)" alt="$(c.json.alt)">
+		<div>
+          <a href="https://xkcd.com/$(c.json.num)">
+            Link to Original
+          </a>
+	    </div>
+      </div>
+    """))
 end
+
+#-----------------------------------------------------------------------------# rand
+Base.rand(::Type{Comic}) = Comic(rand(1:Comic().json.num))
 
 end # module
