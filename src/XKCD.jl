@@ -1,6 +1,6 @@
 module XKCD
 
-using HTTP, JSON3, DefaultApplication
+using HTTP, JSON3
 
 export Comic
 
