@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/joshday/XKCD.jl.svg?branch=master)](https://travis-ci.org/joshday/XKCD.jl)
+ [![Build status](https://github.com/joshday/XKCD.jl/workflows/CI/badge.svg)](https://github.com/joshday/XKCD.jl/actions?query=workflow%3ACI+branch%3Amaster) 
 
 # XKCD
 
