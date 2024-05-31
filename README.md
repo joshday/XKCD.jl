@@ -1,4 +1,4 @@
- [![Build status](https://github.com/joshday/XKCD.jl/workflows/CI/badge.svg)](https://github.com/joshday/XKCD.jl/actions?query=workflow%3ACI+branch%3Amaster) 
+[![CI](https://github.com/joshday/XKCD.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/joshday/XKCD.jl/actions/workflows/CI.yml)
 
 # XKCD
 
