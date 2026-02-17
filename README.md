@@ -1,4 +1,7 @@
 [![CI](https://github.com/joshday/XKCD.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/joshday/XKCD.jl/actions/workflows/CI.yml)
+[![Docs Build](https://github.com/joshday/XKCD.jl/actions/workflows/Docs.yml/badge.svg)](https://github.com/joshday/XKCD.jl/actions/workflows/Docs.yml)
+[![Stable Docs](https://img.shields.io/badge/docs-stable-blue)](https://joshday.github.io/XKCD.jl/stable/)
+[![Dev Docs](https://img.shields.io/badge/docs-dev-blue)](https://joshday.github.io/XKCD.jl/dev/)
 
 # XKCD
 

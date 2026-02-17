@@ -1,0 +1,23 @@
+---
+title: "XKCD.jl"
+engine: julia
+---
+
+Welcome to the documentation for **XKCD.jl**.
+
+## Overview
+
+XKCD.jl is a Julia package that ...
+
+## Installation
+
+```julia
+using Pkg
+Pkg.add("XKCD")
+```
+
+## Quickstart
+
+```{julia}
+println("Hello, World!")
+```
